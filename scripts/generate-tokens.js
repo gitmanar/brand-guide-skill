@@ -13,7 +13,7 @@ const path = require('path');
 function generateTypeScale(baseSize = 16, ratio = 1.25) {
   const sizes = {};
   const names = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'];
-  const baseIndex = 2; // 'base' is at index 2
+  const baseIndex = names.indexOf('base');
 
   for (let i = 0; i < names.length; i++) {
     const power = i - baseIndex;
@@ -42,8 +42,21 @@ function generateSpacingScale(baseUnit = 4) {
   return scale;
 }
 
+function generateCSSDeclarations(brandData) {
+  // Returns only the inner declarations (no :root wrapper)
+  // for embedding inside an existing :root {} block.
+  const lines = [];
+  return _buildCSSLines(brandData, lines);
+}
+
 function generateCSS(brandData) {
   const lines = [':root {'];
+  _buildCSSLines(brandData, lines);
+  lines.push('}');
+  return lines.join('\n');
+}
+
+function _buildCSSLines(brandData, lines) {
 
   // Colors
   if (brandData.palette) {
@@ -121,7 +134,6 @@ function generateCSS(brandData) {
   lines.push('  --easing-in: cubic-bezier(0.4, 0, 1, 1);');
   lines.push('  --easing-out: cubic-bezier(0, 0, 0.2, 1);');
 
-  lines.push('}');
   return lines.join('\n');
 }
 
@@ -256,4 +268,4 @@ if (require.main === module) {
   console.log('Generated:', JSON.stringify(files));
 }
 
-module.exports = { generateCSS, generateJSON, generateTailwindConfig, writeTokens, generateTypeScale, generateSpacingScale };
+module.exports = { generateCSS, generateCSSDeclarations, generateJSON, generateTailwindConfig, writeTokens, generateTypeScale, generateSpacingScale };

@@ -87,18 +87,24 @@ function generateScale(hex) {
   const rgb = hexToRGB(hex);
   const hsl = rgbToHSL(rgb.r, rgb.g, rgb.b);
 
+  // Normalize: anchor 500 at a stable midpoint (~47% lightness) regardless
+  // of the input color's actual lightness. This ensures 50-400 are always
+  // light tints and 600-950 are always dark shades, even for very dark or
+  // very light input colors. The hue and saturation come from the input.
+  const midL = 47;
+
   const stops = [
-    { name: '50',  l: 97, sMod: 1.1 },
-    { name: '100', l: 94, sMod: 1.05 },
-    { name: '200', l: 86, sMod: 1.0 },
-    { name: '300', l: 74, sMod: 1.0 },
-    { name: '400', l: 60, sMod: 1.0 },
-    { name: '500', l: hsl.l, sMod: 1.0 },
-    { name: '600', l: hsl.l * 0.8, sMod: 1.0 },
-    { name: '700', l: hsl.l * 0.6, sMod: 1.0 },
-    { name: '800', l: hsl.l * 0.4, sMod: 1.05 },
-    { name: '900', l: hsl.l * 0.25, sMod: 1.1 },
-    { name: '950', l: hsl.l * 0.15, sMod: 1.2 },
+    { name: '50',  l: 97,           sMod: 1.1 },
+    { name: '100', l: 94,           sMod: 1.05 },
+    { name: '200', l: 86,           sMod: 1.0 },
+    { name: '300', l: 74,           sMod: 1.0 },
+    { name: '400', l: 60,           sMod: 1.0 },
+    { name: '500', l: midL,         sMod: 1.0 },
+    { name: '600', l: midL * 0.8,   sMod: 1.0 },
+    { name: '700', l: midL * 0.6,   sMod: 1.0 },
+    { name: '800', l: midL * 0.4,   sMod: 1.05 },
+    { name: '900', l: midL * 0.25,  sMod: 1.1 },
+    { name: '950', l: midL * 0.15,  sMod: 1.2 },
   ];
 
   const scale = {};

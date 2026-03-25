@@ -370,7 +370,7 @@ body {
   color: var(--guide-text);
   transition: border-color 0.2s;
 }
-.form-input:focus, .form-select:focus { outline: none; border-color: var(--guide-accent); box-shadow: 0 0 0 3px rgba(var(--guide-accent-rgb, 0,0,0), 0.1); }
+.form-input:focus, .form-select:focus { outline: none; border-color: var(--guide-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--guide-accent) 20%, transparent); }
 .form-checkbox { accent-color: var(--guide-accent); }
 
 /* Cards */

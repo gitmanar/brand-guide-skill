@@ -30,7 +30,43 @@ Gather these from the user. **Required** items are marked; everything else enhan
 | Icon files | No | File paths to icon assets |
 | Existing brand assets | No | Any partial style guides, PDFs, docs |
 
-Use `AskUserQuestion` to collect inputs interactively. Start with required fields, then ask about optional ones in groups.
+### Interactive Collection Flow
+
+Use `AskUserQuestion` to guide the user through input collection in this order:
+
+**Step 1 — Essentials** (single question):
+> "What is the brand name, and do you have a tagline?"
+
+**Step 2 — Colors** (ask):
+> "What are your brand colors? Provide hex codes and their roles (e.g., primary: #2563eb, secondary: #7c3aed). If you only have 1-2 colors, I'll suggest complementary ones."
+
+**Step 3 — Typography** (ask with options):
+> "How would you like to provide fonts?"
+> Options: "Google Fonts names" / "Local font files (.woff2, .ttf, .otf)" / "Both"
+
+Then ask for the specific font names or file paths.
+
+**Step 4 — Logo & Assets** (ask with options):
+> "Do you have brand assets to include?"
+> Options: "Logo files (SVG/PNG)" / "Logo + brand imagery" / "Logo + icons + imagery" / "No assets yet"
+
+If they have assets, ask them to provide the file paths.
+
+**Step 5 — Brand Identity** (ask with options):
+> "How much brand identity detail do you want to include?"
+> Options: "Just colors & typography (minimal)" / "Add mission, values & personality (standard)" / "Full guide with voice, tone & imagery direction (comprehensive)"
+
+If standard or comprehensive, ask follow-up questions for mission, vision, values, personality adjectives, and voice/tone notes.
+
+**Step 6 — Reference Sources** (ask):
+> "Do you have any existing design reference to pull from?"
+> Options: "Website URL to analyze" / "Figma exports" / "Screenshots" / "Existing partial brand docs" / "None"
+
+**Step 7 — Output** (ask):
+> "Where should I generate the brand guide?"
+> Default: `./brand-guide-output/`
+
+After collection, summarize what will be included and confirm before generating.
 
 ## Output Structure
 
@@ -91,7 +127,7 @@ digraph brand_guide {
 
 ### Phase 2: Generate Palette
 
-Run `generate-palette.js` with the user's colors:
+Run `generate-palette.js` with the user's colors. If bash/Node execution is unavailable, implement the same algorithm using the formulas in `reference/color-system.md`.
 
 ```bash
 node ~/.claude/skills/brand-guide/scripts/generate-palette.js '{"primary":"#HEX","secondary":"#HEX"}'
@@ -131,21 +167,46 @@ Produces `tokens.css`, `tokens.json`, `tailwind.config.js`.
 
 Read the template from `~/.claude/skills/brand-guide/templates/html-template.html`.
 
-Replace all `{{PLACEHOLDER}}` tokens with generated content. Key replacements:
+Replace all `{{PLACEHOLDER}}` tokens with generated content. **Every** placeholder in the template must be replaced or the section removed.
 
-| Placeholder | Content |
-|-------------|---------|
-| `{{BRAND_NAME}}` | Brand name |
-| `{{BRAND_TAGLINE}}` | Tagline or empty |
-| `{{FONT_IMPORTS}}` | `@font-face` blocks or Google Fonts `<link>` |
-| `{{PRIMARY_COLOR}}` | Primary hex for guide accent |
-| `{{CSS_TOKENS}}` | Full CSS custom properties from tokens.css |
-| `{{COLOR_PALETTES}}` | Generated color swatch HTML for each palette |
-| `{{FONT_SPECIMENS}}` | Typography specimen blocks |
-| `{{TYPE_SCALE_DISPLAY}}` | Type scale items rendered at each size |
-| `{{TOKENS_CSS}}` | Raw CSS token content for code display |
-| `{{TOKENS_JSON}}` | Raw JSON token content for code display |
-| `{{TOKENS_TAILWIND}}` | Raw Tailwind config for code display |
+**Important:** For `{{CSS_TOKENS}}` in `html-styles.css`, insert only the inner declarations (no `:root {}` wrapper) — the CSS file already has a `:root {}` block. Use `generateCSSDeclarations()` from `generate-tokens.js` instead of `generateCSS()`.
+
+**Important:** For sections where the user provided no data, remove the entire `<section>` block AND its corresponding `<li>` nav link from the HTML. Don't leave empty sections.
+
+| Placeholder | Content | Required |
+|-------------|---------|----------|
+| `{{BRAND_NAME}}` | Brand name | Yes |
+| `{{BRAND_TAGLINE}}` | Tagline text | No — remove if empty |
+| `{{VERSION}}` | `"1.0"` or user-specified | Yes — default `"1.0"` |
+| `{{DATE}}` | Today's date (YYYY-MM-DD) | Yes |
+| `{{FONT_IMPORTS}}` | `@font-face` blocks or Google Fonts `<link>` | Yes |
+| `{{PRIMARY_COLOR}}` | Primary hex (for guide accent color) | Yes |
+| `{{CSS_TOKENS}}` | CSS declarations only (no `:root` wrapper) | Yes |
+| `{{BRAND_LOGO_SMALL}}` | `<img>` tag for nav logo (28px height) | No — use text fallback |
+| `{{BRAND_LOGO_FULL}}` | `<img>` tag for cover logo (120px height) | No — use brand name as `<h1>` |
+| `{{LOGO_SMALL}}` | Small logo `<img>` for don'ts section | No — skip don'ts if no logo |
+| `{{BRAND_MISSION}}` | Mission statement text | No |
+| `{{BRAND_VISION}}` | Vision statement text | No |
+| `{{BRAND_VALUES}}` | `.value-item` divs with `.value-name` + `.value-description` | No |
+| `{{BRAND_PERSONALITY}}` | `.personality-tag` spans | No |
+| `{{LOGO_VARIANTS}}` | `.logo-variant` divs with logo images on light/dark | No |
+| `{{LOGO_CLEARSPACE_VISUAL}}` | Visual showing clear space around logo | No |
+| `{{LOGO_DOWNLOAD_LINKS}}` | `.download-link` anchors for each logo file | No |
+| `{{COLOR_PALETTES}}` | Color swatch HTML (see format below) | Yes |
+| `{{CONTRAST_MATRIX_TABLE}}` | `<table>` with contrast ratios between key colors | Yes |
+| `{{FONT_SPECIMENS}}` | `.font-specimen` divs with font name + character display | Yes |
+| `{{TYPE_SCALE_DISPLAY}}` | `.type-scale-item` divs at each scale size | Yes |
+| `{{WEIGHT_SCALE_DISPLAY}}` | `.weight-item` divs for each available font weight | Yes |
+| `{{FONT_DOWNLOAD_LINKS}}` | `.download-link` anchors for each font file | No |
+| `{{SPACING_SCALE_VISUAL}}` | `.spacing-item` divs with colored bars | Yes |
+| `{{RADIUS_VISUAL}}` | `.radius-item` divs with styled preview boxes | Yes |
+| `{{SHADOW_VISUAL}}` | `.shadow-item` divs with shadow preview boxes | Yes |
+| `{{IMAGERY_CONTENT}}` | `.imagery-grid` with sample images, or remove section | No |
+| `{{ICONOGRAPHY_CONTENT}}` | Icon grid display, or remove section | No |
+| `{{VOICE_TONE_CONTENT}}` | Tone spectrum + do/don't lists, or remove section | No |
+| `{{TOKENS_CSS}}` | Raw CSS token content (full `:root {}` block) for code display | Yes |
+| `{{TOKENS_JSON}}` | Raw JSON token content for code display | Yes |
+| `{{TOKENS_TAILWIND}}` | Raw Tailwind config for code display | Yes |
 
 For each **color palette**, generate swatch HTML:
 ```html
