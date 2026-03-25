@@ -1,5 +1,36 @@
 # Color System Reference
 
+## 3-Tier Token Architecture
+
+Elite design systems (Material Design, Spectrum, Polaris) use 3 tiers:
+
+| Tier | Name | Example | Purpose |
+|------|------|---------|---------|
+| 1 | Primitive | `color-blue-500: #3B82F6` | Raw values, no semantic meaning |
+| 2 | Semantic | `color-action-primary: {blue-500}` | Named by purpose, references primitives |
+| 3 | Component | `button-bg-primary: {action-primary}` | Scoped to components |
+
+Rebranding = change Tier 1 only. Dark mode = swap Tier 2 mappings. Component theming = override Tier 3.
+
+Generate at minimum Tiers 1 and 2. Tier 3 is optional for brand guides (more relevant for full design systems).
+
+### Semantic Token Categories
+
+Generate these semantic mappings from the primitive palette:
+
+```
+color-action-primary     → primary-500
+color-action-primary-hover → primary-600
+color-surface-page       → neutral-50 (light) / neutral-950 (dark)
+color-surface-default    → white (light) / neutral-900 (dark)
+color-surface-raised     → white (light) / neutral-800 (dark)
+color-text-primary       → neutral-900 (light) / neutral-50 (dark)
+color-text-secondary     → neutral-600 (light) / neutral-400 (dark)
+color-text-disabled      → neutral-400 (light) / neutral-600 (dark)
+color-border-default     → neutral-200 (light) / neutral-700 (dark)
+color-border-focus       → primary-500
+```
+
 ## WCAG Accessibility Requirements
 
 | Level | Normal Text (< 18pt) | Large Text (≥ 18pt / 14pt bold) | UI Components |
@@ -61,7 +92,9 @@ function generateScale(hex) {
 }
 ```
 
-If base color lightness ≠ ~50%, remap it to the 500 slot and interpolate around it.
+The `generate-palette.js` script normalizes the 500 stop to ~47% lightness regardless of input.
+
+**OKLCH note:** HSL produces muddy, desaturated results at scale extremes. For highest quality, consider generating scales in OKLCH (perceptually uniform) color space. The script uses HSL for zero-dependency operation, but when quality is paramount, convert to OKLCH, adjust lightness along a perceptual curve, and slightly shift hue at extremes to maintain perceived chroma.
 
 ## Dark Mode Palette
 

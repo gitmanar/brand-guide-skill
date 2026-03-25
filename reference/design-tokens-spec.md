@@ -136,6 +136,38 @@ module.exports = {
 };
 ```
 
+## Semantic Token Layer
+
+In addition to primitive tokens, generate semantic aliases for dark mode and theming:
+
+```css
+/* Light mode (default) */
+:root {
+  --color-action-primary: var(--color-primary-500);
+  --color-action-primary-hover: var(--color-primary-600);
+  --color-surface-page: var(--color-neutral-50);
+  --color-surface-default: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-disabled: var(--color-neutral-400);
+  --color-border-default: var(--color-neutral-200);
+  --color-border-focus: var(--color-primary-500);
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --color-action-primary: var(--color-primary-400);
+  --color-surface-page: var(--color-neutral-950);
+  --color-surface-default: var(--color-neutral-900);
+  --color-surface-raised: var(--color-neutral-800);
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-400);
+  --color-text-disabled: var(--color-neutral-600);
+  --color-border-default: var(--color-neutral-700);
+}
+```
+
 ## Token Categories Checklist
 
 When generating tokens, always include:

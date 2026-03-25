@@ -89,6 +89,31 @@ Read `typography-system.md` for scale calculations.
 - Code snippets: CSS custom properties, JSON, Tailwind config
 - Copy buttons for each value
 
+### 12. Motion & Animation (optional, comprehensive only)
+- **Motion philosophy**: purposeful motion that aids understanding
+- **Easing tokens**: `ease-default: cubic-bezier(0.4, 0, 0.2, 1)`, `ease-in`, `ease-out`
+- **Duration scale**: fast (150ms), normal (300ms), slow (500ms)
+- **Entrance/exit patterns**: fade, slide, scale
+- **Reduced motion**: respect `prefers-reduced-motion` — always provide static fallback
+
+### 13. Print & Marketing Templates (optional)
+- Business card layout with bleed/safe zones
+- Letterhead / email signature
+- Social media templates (sizes for each platform)
+- Presentation slide master
+
+## What Makes Elite Guides Stand Out
+
+| Differentiator | Elite | Mediocre |
+|---|---|---|
+| Format | Living URL + PDF | Single PDF |
+| Tokens | 3-tier semantic tokens → production code | Hex color list |
+| Accessibility | WCAG ratios next to every color combo | Not mentioned |
+| Voice/Tone | Context-specific tone matrix | "Be friendly" |
+| Do/Don'ts | Every rule has a visual counterexample | Rules only |
+| Rationale | WHY each decision was made | Just the decision |
+| Components | Typography/color expressed through live UI | Static rules |
+
 ## Section Completeness
 
 **Minimum viable guide** (brand name + colors + font):
@@ -97,5 +122,5 @@ Sections 1, 4, 5, 11 — cover, colors, typography, tokens
 **Standard guide** (+ logo + personality):
 Add sections 2, 3, 6, 9, 10
 
-**Comprehensive guide** (+ imagery + icons):
-All 11 sections
+**Comprehensive guide** (+ imagery + icons + motion):
+All 13 sections
