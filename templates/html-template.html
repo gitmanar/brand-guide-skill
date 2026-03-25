@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BRAND_NAME}} — Brand Guidelines</title>
+  <!-- FONT_IMPORTS: @font-face declarations or Google Fonts links injected here -->
+  {{FONT_IMPORTS}}
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="brand-nav" id="brand-nav">
+    <div class="nav-header">
+      <div class="nav-logo">{{BRAND_LOGO_SMALL}}</div>
+      <span class="nav-title">Brand Guidelines</span>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      </button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#cover" class="active">Cover</a></li>
+      <li><a href="#brand-story">Brand Story</a></li>
+      <li><a href="#logo-usage">Logo Usage</a></li>
+      <li><a href="#color-system">Color System</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#spacing-layout">Spacing & Layout</a></li>
+      <li><a href="#imagery">Imagery</a></li>
+      <li><a href="#iconography">Iconography</a></li>
+      <li><a href="#voice-tone">Voice & Tone</a></li>
+      <li><a href="#ui-components">UI Components</a></li>
+      <li><a href="#design-tokens">Design Tokens</a></li>
+    </ul>
+    <div class="nav-footer">
+      <span class="nav-version">v{{VERSION}} — {{DATE}}</span>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="brand-main">
+
+    <!-- Section 1: Cover -->
+    <section id="cover" class="section section-cover">
+      <div class="cover-content">
+        <div class="cover-logo">{{BRAND_LOGO_FULL}}</div>
+        <h1 class="cover-title">Brand Guidelines</h1>
+        <p class="cover-tagline">{{BRAND_TAGLINE}}</p>
+        <div class="cover-meta">
+          <span>Version {{VERSION}}</span>
+          <span>{{DATE}}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Brand Story -->
+    <section id="brand-story" class="section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Brand Story</h2>
+      </div>
+      <div class="section-content">
+        <div class="story-grid">
+          <div class="story-card">
+            <h3>Mission</h3>
+            <p>{{BRAND_MISSION}}</p>
+          </div>
+          <div class="story-card">
+            <h3>Vision</h3>
+            <p>{{BRAND_VISION}}</p>
+          </div>
+        </div>
+        <div class="values-grid">
+          <h3>Core Values</h3>
+          {{BRAND_VALUES}}
+        </div>
+        <div class="personality-tags">
+          <h3>Brand Personality</h3>
+          {{BRAND_PERSONALITY}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Logo Usage -->
+    <section id="logo-usage" class="section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Logo Usage</h2>
+      </div>
+      <div class="section-content">
+        <div class="logo-variants-grid">
+          <h3>Logo Variants</h3>
+          {{LOGO_VARIANTS}}
+        </div>
+        <div class="logo-clearspace">
+          <h3>Clear Space</h3>
+          <p>Maintain a minimum clear space around the logo equal to the height of the defining character. This ensures the logo maintains its visual impact.</p>
+          {{LOGO_CLEARSPACE_VISUAL}}
+        </div>
+        <div class="logo-min-size">
+          <h3>Minimum Sizes</h3>
+          <div class="min-size-grid">
+            <div class="min-size-item">
+              <span class="min-size-label">Digital</span>
+              <span class="min-size-value">80px wide</span>
+            </div>
+            <div class="min-size-item">
+              <span class="min-size-label">Print</span>
+              <span class="min-size-value">25mm wide</span>
+            </div>
+          </div>
+        </div>
+        <div class="logo-donts">
+          <h3>Incorrect Usage</h3>
+          <div class="donts-grid">
+            <div class="dont-item"><div class="dont-visual dont-stretch">{{LOGO_SMALL}}</div><span>Don't stretch or distort</span></div>
+            <div class="dont-item"><div class="dont-visual dont-rotate">{{LOGO_SMALL}}</div><span>Don't rotate</span></div>
+            <div class="dont-item"><div class="dont-visual dont-opacity">{{LOGO_SMALL}}</div><span>Don't reduce opacity</span></div>
+            <div class="dont-item"><div class="dont-visual dont-effects">{{LOGO_SMALL}}</div><span>Don't add effects</span></div>
+          </div>
+        </div>
+        <div class="logo-downloads">
+          <h3>Downloads</h3>
+          {{LOGO_DOWNLOAD_LINKS}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Color System -->
+    <section id="color-system" class="section">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Color System</h2>
+      </div>
+      <div class="section-content">
+        {{COLOR_PALETTES}}
+
+        <div class="contrast-matrix">
+          <h3>Accessibility — Contrast Ratios</h3>
+          <p>All text and UI color pairings meet WCAG 2.1 AA standards (4.5:1 for normal text, 3:1 for large text and UI components).</p>
+          {{CONTRAST_MATRIX_TABLE}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Typography -->
+    <section id="typography" class="section">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Typography</h2>
+      </div>
+      <div class="section-content">
+        <div class="font-specimens">
+          {{FONT_SPECIMENS}}
+        </div>
+        <div class="type-scale">
+          <h3>Type Scale</h3>
+          {{TYPE_SCALE_DISPLAY}}
+        </div>
+        <div class="type-weights">
+          <h3>Weight Scale</h3>
+          {{WEIGHT_SCALE_DISPLAY}}
+        </div>
+        <div class="font-downloads">
+          <h3>Font Files</h3>
+          {{FONT_DOWNLOAD_LINKS}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Spacing & Layout -->
+    <section id="spacing-layout" class="section">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2>Spacing & Layout</h2>
+      </div>
+      <div class="section-content">
+        <div class="spacing-scale">
+          <h3>Spacing Scale</h3>
+          {{SPACING_SCALE_VISUAL}}
+        </div>
+        <div class="grid-system">
+          <h3>Grid System</h3>
+          <p>12-column grid with responsive breakpoints.</p>
+          <div class="breakpoints-table">
+            <table>
+              <thead><tr><th>Breakpoint</th><th>Width</th><th>Columns</th><th>Gutter</th></tr></thead>
+              <tbody>
+                <tr><td>Mobile</td><td>375px</td><td>4</td><td>16px</td></tr>
+                <tr><td>Tablet</td><td>768px</td><td>8</td><td>24px</td></tr>
+                <tr><td>Desktop</td><td>1024px</td><td>12</td><td>24px</td></tr>
+                <tr><td>Wide</td><td>1440px</td><td>12</td><td>32px</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="border-radius-tokens">
+          <h3>Border Radius</h3>
+          {{RADIUS_VISUAL}}
+        </div>
+        <div class="elevation-tokens">
+          <h3>Elevation / Shadows</h3>
+          {{SHADOW_VISUAL}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Imagery -->
+    <section id="imagery" class="section">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2>Imagery & Photography</h2>
+      </div>
+      <div class="section-content">
+        {{IMAGERY_CONTENT}}
+      </div>
+    </section>
+
+    <!-- Section 8: Iconography -->
+    <section id="iconography" class="section">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <h2>Iconography</h2>
+      </div>
+      <div class="section-content">
+        {{ICONOGRAPHY_CONTENT}}
+      </div>
+    </section>
+
+    <!-- Section 9: Voice & Tone -->
+    <section id="voice-tone" class="section">
+      <div class="section-header">
+        <span class="section-number">08</span>
+        <h2>Voice & Tone</h2>
+      </div>
+      <div class="section-content">
+        {{VOICE_TONE_CONTENT}}
+      </div>
+    </section>
+
+    <!-- Section 10: UI Components -->
+    <section id="ui-components" class="section">
+      <div class="section-header">
+        <span class="section-number">09</span>
+        <h2>UI Components</h2>
+      </div>
+      <div class="section-content">
+        <div class="components-grid">
+          <!-- Buttons -->
+          <div class="component-card">
+            <h3>Buttons</h3>
+            <div class="component-preview">
+              <button class="btn btn-primary">Primary Button</button>
+              <button class="btn btn-secondary">Secondary Button</button>
+              <button class="btn btn-ghost">Ghost Button</button>
+              <button class="btn btn-destructive">Destructive</button>
+            </div>
+            <div class="component-states">
+              <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+          </div>
+
+          <!-- Form Inputs -->
+          <div class="component-card">
+            <h3>Form Inputs</h3>
+            <div class="component-preview">
+              <div class="form-group">
+                <label class="form-label">Text Input</label>
+                <input type="text" class="form-input" placeholder="Placeholder text">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Select</label>
+                <select class="form-select"><option>Option 1</option><option>Option 2</option></select>
+              </div>
+              <div class="form-group form-inline">
+                <input type="checkbox" class="form-checkbox" id="check1"><label for="check1">Checkbox</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cards -->
+          <div class="component-card">
+            <h3>Cards</h3>
+            <div class="component-preview">
+              <div class="brand-card">
+                <div class="brand-card-header">Card Title</div>
+                <div class="brand-card-body">Card content with body text using the brand typography and spacing.</div>
+                <div class="brand-card-footer"><button class="btn btn-primary btn-sm">Action</button></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badges -->
+          <div class="component-card">
+            <h3>Badges & Tags</h3>
+            <div class="component-preview badge-preview">
+              <span class="badge badge-primary">Primary</span>
+              <span class="badge badge-secondary">Secondary</span>
+              <span class="badge badge-success">Success</span>
+              <span class="badge badge-warning">Warning</span>
+              <span class="badge badge-error">Error</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 11: Design Tokens -->
+    <section id="design-tokens" class="section">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <h2>Design Tokens</h2>
+      </div>
+      <div class="section-content">
+        <div class="tokens-tabs">
+          <button class="token-tab active" data-tab="css">CSS Variables</button>
+          <button class="token-tab" data-tab="json">JSON</button>
+          <button class="token-tab" data-tab="tailwind">Tailwind</button>
+        </div>
+        <div class="token-panels">
+          <div class="token-panel active" id="panel-css">
+            <pre><code>{{TOKENS_CSS}}</code></pre>
+          </div>
+          <div class="token-panel" id="panel-json">
+            <pre><code>{{TOKENS_JSON}}</code></pre>
+          </div>
+          <div class="token-panel" id="panel-tailwind">
+            <pre><code>{{TOKENS_TAILWIND}}</code></pre>
+          </div>
+        </div>
+        <div class="token-downloads">
+          <h3>Download Token Files</h3>
+          <div class="download-grid">
+            <a href="tokens.css" class="download-link" download>tokens.css</a>
+            <a href="tokens.json" class="download-link" download>tokens.json</a>
+            <a href="tailwind.config.js" class="download-link" download>tailwind.config.js</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
