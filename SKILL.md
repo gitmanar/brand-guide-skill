@@ -24,7 +24,8 @@ Gather these from the user. **Required** items are marked; everything else enhan
 | Core values | No | List of value + description pairs |
 | Brand personality | No | 3-5 adjectives (e.g., "Bold, Friendly, Innovative") |
 | Voice & tone notes | No | Text describing communication style |
-| Screenshots / website URLs | No | For reference extraction |
+| Screenshots | No | Image file paths — analyzed visually to extract colors, fonts, layout patterns |
+| Website URLs | No | Live URLs — navigated with browse tools to extract colors, fonts, visual patterns |
 | Figma export files | No | `.fig` or exported JSON |
 | Imagery samples | No | File paths to brand photography |
 | Icon files | No | File paths to icon assets |
@@ -62,6 +63,14 @@ If standard or comprehensive, ask follow-up questions for mission, vision, value
 > "Do you have any existing design reference to pull from?"
 > Options: "Website URL to analyze" / "Figma exports" / "Screenshots" / "Existing partial brand docs" / "None"
 
+If the user provides a **website URL**: Use the browse/Playwright MCP tools to navigate the site, take a screenshot, and visually analyze it. Extract:
+- Dominant colors (from backgrounds, buttons, text, accent elements)
+- Font families (from headings and body text)
+- Border radius patterns, spacing patterns
+- Logo if visible
+
+If the user provides **screenshots**: Use the `Read` tool on the image file to visually analyze it. Extract the same elements as above. Present findings to the user and ask them to confirm/adjust the extracted values before proceeding.
+
 **Step 7 — Output** (ask):
 > "Where should I generate the brand guide?"
 > Default: `./brand-guide-output/`
@@ -77,8 +86,9 @@ brand-guide-output/
 ├── index.html            # Interactive brand guide
 ├── styles.css            # Guide stylesheet
 ├── scripts.js            # Interactive features
-├── tokens.css            # CSS custom properties
-├── tokens.json           # W3C Design Token format
+├── tokens.css            # CSS custom properties (with semantic + dark mode tokens)
+├── tokens.json           # W3C Design Token format (with semantic layer)
+├── tokens.scss           # SCSS variables + color maps
 ├── tailwind.config.js    # Tailwind theme extension
 └── assets/
     ├── logos/            # All logo files (copied)
@@ -206,6 +216,7 @@ Replace all `{{PLACEHOLDER}}` tokens with generated content. **Every** placehold
 | `{{VOICE_TONE_CONTENT}}` | Tone spectrum + do/don't lists, or remove section | No |
 | `{{TOKENS_CSS}}` | Raw CSS token content (full `:root {}` block) for code display | Yes |
 | `{{TOKENS_JSON}}` | Raw JSON token content for code display | Yes |
+| `{{TOKENS_SCSS}}` | Raw SCSS variable content for code display | Yes |
 | `{{TOKENS_TAILWIND}}` | Raw Tailwind config for code display | Yes |
 
 For each **color palette**, generate swatch HTML:

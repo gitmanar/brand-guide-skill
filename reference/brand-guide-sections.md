@@ -70,10 +70,30 @@ Read `typography-system.md` for scale calculations.
 - If user provides icon files, showcase them
 
 ### 9. Voice & Tone
-- **Brand personality** in writing: 3-5 descriptors
-- **Tone spectrum**: formal ←→ casual, serious ←→ playful, etc.
+
+Use the **4-Attribute Framework** (as used by Mailchimp, Slack, and other elite guides):
+
+For each personality adjective the user provides, define:
+- **The attribute** (e.g., "Bold")
+- **What it means** ("We take clear positions and make confident statements")
+- **What it does NOT mean** ("Not aggressive, not dismissive of alternatives")
+- **Before/After examples** showing the attribute applied to real copy
+
+Generate a **Tone Matrix** showing how tone shifts by context:
+
+| Context | Tone | Example |
+|---------|------|---------|
+| Onboarding | Warm, encouraging | "Welcome! Here's how to get started." |
+| Error messages | Calm, helpful, non-blaming | "Something went wrong. Let's try again." |
+| Marketing | Energetic, confident | "Build faster. Ship smarter." |
+| Legal/compliance | Clear, precise | "By continuing, you agree to our terms." |
+| Celebration | Joyful, brief | "You did it!" |
+
+Key principle: **Voice is constant. Tone adapts to context.**
+
+Also include:
 - **Do/Don't word lists**: preferred terms vs avoided terms
-- **Example copy**: headlines, CTAs, error messages, empty states
+- **Writing principles**: active voice, sentence length limits, Oxford comma stance, numeral rules
 - **Audience awareness**: how tone shifts for different contexts
 
 ### 10. UI Components

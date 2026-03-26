@@ -314,12 +314,16 @@
       <div class="section-content">
         <div class="tokens-tabs">
           <button class="token-tab active" data-tab="css">CSS Variables</button>
+          <button class="token-tab" data-tab="scss">SCSS</button>
           <button class="token-tab" data-tab="json">JSON</button>
           <button class="token-tab" data-tab="tailwind">Tailwind</button>
         </div>
         <div class="token-panels">
           <div class="token-panel active" id="panel-css">
             <pre><code>{{TOKENS_CSS}}</code></pre>
+          </div>
+          <div class="token-panel" id="panel-scss">
+            <pre><code>{{TOKENS_SCSS}}</code></pre>
           </div>
           <div class="token-panel" id="panel-json">
             <pre><code>{{TOKENS_JSON}}</code></pre>
@@ -332,6 +336,7 @@
           <h3>Download Token Files</h3>
           <div class="download-grid">
             <a href="tokens.css" class="download-link" download>tokens.css</a>
+            <a href="tokens.scss" class="download-link" download>tokens.scss</a>
             <a href="tokens.json" class="download-link" download>tokens.json</a>
             <a href="tailwind.config.js" class="download-link" download>tailwind.config.js</a>
           </div>
